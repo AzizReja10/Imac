@@ -1,4 +1,5 @@
-import { Howl } from 'howler'
+import { Howl, Howler } from 'howler'
+import { useSetup } from '@/store/useSetup'
 
 const keys = new Howl({
   src: [`${import.meta.env.BASE_URL}sounds/keys.ogg`, `${import.meta.env.BASE_URL}sounds/keys.mp3`],
@@ -9,6 +10,11 @@ const keys = new Howl({
     heavy1: [2400, 130], heavy2: [2700, 130],
     up1: [3000, 90], up2: [3300, 90], up3: [3600, 90], up4: [3900, 90], up5: [4200, 90],
   },
+})
+
+const bootSound = new Howl({
+  src: [`${import.meta.env.BASE_URL}apple.mp3`],
+  volume: 0.85,
 })
 
 let ctx: AudioContext | null = null
@@ -29,6 +35,9 @@ function getCtx() {
 export async function unlockAudio() {
   const c = getCtx()
   if (c.state === 'suspended') await c.resume()
+  if (Howler.ctx && Howler.ctx.state === 'suspended') {
+    await Howler.ctx.resume()
+  }
 }
 
 // Short filtered noise burst = the "click" part of a keypress
@@ -82,20 +91,12 @@ export function playClick(down: boolean) {
 }
 
 export function playBoot() {
-  const c = getCtx()
-  const t = c.currentTime
-  const notes = [261.63, 329.63, 392, 523.25]
-  notes.forEach((f, i) => {
-    const o = c.createOscillator()
-    const g = c.createGain()
-    o.type = 'sine'
-    o.frequency.value = f
-    g.gain.setValueAtTime(0.0001, t)
-    g.gain.exponentialRampToValueAtTime(0.12, t + 0.15 + i * 0.02)
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6)
-    o.connect(g)
-    g.connect(c.destination)
-    o.start(t)
-    o.stop(t + 1.7)
-  })
+  const soundOn = useSetup.getState().soundOn
+  if (!soundOn) return
+  bootSound.stop()
+  bootSound.play()
+}
+
+export function stopBoot() {
+  bootSound.stop()
 }

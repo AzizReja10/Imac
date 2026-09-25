@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useSetup } from '@/store/useSetup'
 
-const DURATION = 2200 // ms; roughly matches the boot chime, then the desktop takes over
+const DURATION = 3600 // ms; matches the apple.mp3 boot chime duration
 
 export default function BootScreen() {
   const finishBoot = useSetup((s) => s.finishBoot)

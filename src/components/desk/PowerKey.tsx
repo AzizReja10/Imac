@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useSetup } from '@/store/useSetup'
-import { unlockAudio, playBoot } from '@/lib/sound'
+import { unlockAudio, playBoot, stopBoot } from '@/lib/sound'
 import type { KeyColor } from '@/data/skins'
 
 export default function PowerKey({ c }: { c: KeyColor }) {
@@ -10,7 +10,10 @@ export default function PowerKey({ c }: { c: KeyColor }) {
   const powerOff = useSetup((s) => s.powerOff)
 
   const toggle = async () => {
-    if (powered) return powerOff()
+    if (powered) {
+      stopBoot()
+      return powerOff()
+    }
     if (booting) return
     await unlockAudio() // must be called from inside this real click handler, not later
     playBoot()
