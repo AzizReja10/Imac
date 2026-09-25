@@ -22,12 +22,12 @@ export default function App() {
 
       <Tilt className="relative z-10 flex h-full max-h-screen w-full flex-col items-center justify-center max-w-[1250px]">
         {/* Monitor: main hero component, enlarged further to fill space prominently */}
-        <div className="w-[min(87vh,92vw,1160px)] shrink-0">
+        <div className="w-[min(86vh,92vw,1160px)] shrink-0">
           <Monitor />
         </div>
 
         {/* Keyboard & Mouse: keyboard centered directly under monitor, mouse to the right */}
-        <div className="relative -mt-1 sm:-mt-2 flex w-full items-center justify-center shrink-0">
+        <div className="relative mt-2.5 sm:mt-3.5 flex w-full items-center justify-center shrink-0">
           {/* Keyboard: reduced width to sit neatly as an accessory to the prominent monitor */}
           <div className="w-[min(48vw,620px)] shrink-0">
             <Keyboard />

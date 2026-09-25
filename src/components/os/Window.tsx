@@ -146,10 +146,10 @@ export default function Window({ id, z, minimized, maximized, constraints }: Pro
       {isCalc ? (
         <>
           {/* Integrated macOS Traffic Lights at top-left of the dark calculator header */}
-          <div className="group absolute left-[1.15cqw] top-[1.15cqw] z-20 flex items-center gap-[0.7cqw]">
-            <Light color="#ff5f57" label="Close" onClick={() => closeApp(id)} size="h-[1.5cqw] w-[1.5cqw]" glyphSize="text-[1.1cqw]">×</Light>
-            <Light color="#febc2e" label="Minimize" onClick={() => minimizeApp(id)} size="h-[1.5cqw] w-[1.5cqw]" glyphSize="text-[1.1cqw]">−</Light>
-            <Light color="#28c840" label={maximized ? 'Restore' : 'Maximize'} onClick={() => toggleMaximize(id)} size="h-[1.5cqw] w-[1.5cqw]" glyphSize="text-[1.1cqw]">+</Light>
+          <div className="group absolute left-[1.2cqw] top-[1.2cqw] z-20 flex items-center gap-[0.9cqw]">
+            <Light color="#ff5f57" label="Close" onClick={() => closeApp(id)}>×</Light>
+            <Light color="#febc2e" label="Minimize" onClick={() => minimizeApp(id)}>−</Light>
+            <Light color="#28c840" label={maximized ? 'Restore' : 'Maximize'} onClick={() => toggleMaximize(id)}>+</Light>
           </div>
           {/* Draggable header surface covering top display area */}
           <div
